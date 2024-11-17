@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { Container, CssBaseline } from "@mui/material"
 
 import AppTheme from "../../theme/AppTheme"
+import AppAppBar from "../AppAppBar"
 import Footer from "../Footer"
 
 
@@ -16,6 +17,7 @@ export const GeneralTemplate = ({ children }: GeneralTemplateProps) => {
         <AppTheme>
             <CssBaseline enableColorScheme />
 
+            <AppAppBar />
             <Container
                 maxWidth="lg"
                 component="main"

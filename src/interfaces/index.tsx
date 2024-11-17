@@ -6,10 +6,21 @@ export interface User {
     email: string;
 }
 
+
+export interface UserRegister extends User {
+    password: string;
+}
+
+
 export interface Publication {
     id : number;
     title: string;
     content: string;
     author: string;
     date: string;
+}
+
+export interface UserToken {
+    username: string;
+    password: string;
 }

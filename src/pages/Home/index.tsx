@@ -1,7 +1,6 @@
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
 import { GeneralTemplate } from '../../components/template/general.template';
-import { Search } from './components/Search';
 import { useEffect } from 'react';
 import { AppDispatch, RootState } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -41,7 +40,6 @@ export const MainContent = () => {
                     overflow: 'auto',
                     }}
                 >
-                    <Search />
                 </Box>
                 <Box
                     sx={{
@@ -63,7 +61,6 @@ export const MainContent = () => {
                             overflow: 'auto',
                         }}
                         >
-                        <Search />
                     </Box>
                 </Box>
                 <Grid container spacing={2} columns={8}>
