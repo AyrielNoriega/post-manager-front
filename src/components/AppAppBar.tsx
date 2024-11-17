@@ -56,7 +56,6 @@ export default function AppAppBar() {
     const onSignOut = () => {
         localStorage.removeItem('name');
         localStorage.removeItem('email');
-        localStorage.removeItem('username');
         localStorage.removeItem('token');
 
         dispatch(fetchUserFromLocalStorage());
@@ -94,7 +93,7 @@ export default function AppAppBar() {
                             color="info"
                             size="small"
                             component={Link}
-                            to={`/profile/${user.username}`}
+                            to={`/profile/${user.name}`}
                         >
                             Perfil - {user.name}
                         </Button>

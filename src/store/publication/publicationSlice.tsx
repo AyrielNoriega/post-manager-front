@@ -8,7 +8,6 @@ const initialState = {
     user: {
         id: '',
         name: '',
-        username: '',
         email: '',
     } as User,
 };

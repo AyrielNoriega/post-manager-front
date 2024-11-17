@@ -19,8 +19,6 @@ export const getAllPublications = () => {
 
 // Registro usuario
 export const register = (user: UserRegister, navigate: (path: string) => void) => {
-
-
     return async (dispatch: Dispatch) => {
         console.log('antes de registro', user);
         const res = await registerUser(user);
@@ -34,25 +32,15 @@ export const register = (user: UserRegister, navigate: (path: string) => void) =
         //Obtener token
         const register = await getToken(user);
         if (register.status == 200) {
-            const dataToken = {
-                access_token: register.data.access_token,
-                token_type: register.data.token_type,
-            }
-
-            const user_jwt: User = {
-                id: user.id,
-                name: user.name,
-                email: user.email,
-            }
 
             const dataUser: User = {
-                id: user_jwt.id,
-                name: user_jwt.name,
-                email: user_jwt.email,
+                id: register.data.data.attributes.id,
+                name: register.data.data.attributes.name,
+                email: register.data.data.attributes.email,
             }
             // Establecer usuario
             dispatch(setUser(dataUser));
-            setTokenLocalStorage(dataToken.access_token);
+            setTokenLocalStorage(register.data.data.token);
             setUserInLocalStorage(dataUser);
 
             navigate('/');
@@ -63,10 +51,10 @@ export const register = (user: UserRegister, navigate: (path: string) => void) =
             //     status : register.status
             // }
             console.log("No se pudo obtener el token", register.data);
-
         }
     };
 };
+
 
 // Actaulizar usuario
 export const update = (user: User) => {
@@ -75,7 +63,7 @@ export const update = (user: User) => {
     const id = localStorage.getItem('id') as string;
     console.log(id);
     user.id = id;
-    
+
     return async (dispatch: Dispatch) => {
 
         const res = await updateUser(user, token);
@@ -175,11 +163,10 @@ export const fetchUserFromLocalStorage = () => {
     return (dispatch: Dispatch) => {
         const id = localStorage.getItem('id') as string;
         const name = localStorage.getItem('name') as string;
-        const username = localStorage.getItem('username') as string;
         const email = localStorage.getItem('email') as string;
 
         const user: User = { name, email, id };
-        if (name && username && email) {
+        if (name && email) {
             dispatch(setUser(user));
         }
     };
