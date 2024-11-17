@@ -66,11 +66,14 @@ export const update = (user: User) => {
     return async (dispatch: Dispatch) => {
         const res = await updateUser(user, token);
 
-        console.log(res);
-        return
+        const dataUser: User = {
+            id: res.data.id,
+            name: res.data.name,
+            email: res.data.email,
+        }
         // Establecer usuario
-        dispatch(setUser(user));
-        setUserInLocalStorage(user);
+        dispatch(setUser(dataUser));
+        setUserInLocalStorage(dataUser);
 
     };
 };
