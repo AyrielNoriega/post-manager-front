@@ -9,9 +9,6 @@ import Link from '@mui/material/Link';
 import { Link as LinkRouter } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
-import MuiCard from '@mui/material/Card';
-import { styled } from '@mui/material/styles';
 import { AppDispatch, RootState } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
@@ -19,49 +16,9 @@ import { useNavigate } from "react-router-dom";
 import { FacebookIcon, GoogleIcon } from './components/CustomIcons';
 import { GeneralTemplate } from '../../components/template/general.template';
 import { fetchUserFromLocalStorage, register } from '../../store/publication/thunks';
+import { CardStyled } from './components/CardStyled';
+import { SignUpContainer } from './components/SignUpContainer';
 
-const Card = styled(MuiCard)(({ theme }) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    alignSelf: 'center',
-    width: '100%',
-    padding: theme.spacing(4),
-    gap: theme.spacing(2),
-    margin: 'auto',
-    boxShadow:
-        'hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px',
-    [theme.breakpoints.up('sm')]: {
-        width: '450px',
-    },
-    ...theme.applyStyles('dark', {
-        boxShadow:
-        'hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.08) 0px 15px 35px -5px',
-    }),
-}));
-
-
-const SignUpContainer = styled(Stack)(({ theme }) => ({
-    height: 'calc((1 - var(--template-frame-height, 0)) * 100dvh)',
-    minHeight: '100%',
-    padding: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-        padding: theme.spacing(4),
-    },
-    '&::before': {
-        content: '""',
-        display: 'block',
-        position: 'absolute',
-        zIndex: -1,
-        inset: 0,
-        backgroundImage:
-        'radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))',
-        backgroundRepeat: 'no-repeat',
-        ...theme.applyStyles('dark', {
-        backgroundImage:
-            'radial-gradient(at 50% 50%, hsla(210, 100%, 16%, 0.5), hsl(220, 30%, 5%))',
-        }),
-    },
-}));
 
 
 export const SignUp = () => {
@@ -168,123 +125,123 @@ export const SignUp = () => {
     return (
         <GeneralTemplate>
             <SignUpContainer direction="column" justifyContent="space-between">
-                <Card variant="outlined">
-                <Typography
-                    component="h1"
-                    variant="h4"
-                    sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
-                >
-                    Sign up
-                </Typography>
-                <Box
-                    component="form"
-                    onSubmit={handleSubmit}
-                    sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
-                >
-                    <FormControl>
-                        <FormLabel htmlFor="full_name">Full name</FormLabel>
-                        <TextField
-                            autoComplete="name"
-                            name="full_name"
-                            required
-                            fullWidth
-                            id="full_name"
-                            placeholder="Jon Snow"
-                            error={nameError}
-                            helperText={nameErrorMessage}
-                            color={nameError ? 'error' : 'primary'}
-                        />
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel htmlFor="username">User name</FormLabel>
-                        <TextField
-                            autoComplete="username"
-                            name="username"
-                            required
-                            fullWidth
-                            id="username"
-                            placeholder="JonSnow"
-                            error={nameError}
-                            helperText={nameErrorMessage}
-                            color={nameError ? 'error' : 'primary'}
-                        />
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel htmlFor="email">Email</FormLabel>
-                        <TextField
-                            required
-                            fullWidth
-                            id="email"
-                            placeholder="your@email.com"
-                            name="email"
-                            autoComplete="email"
-                            variant="outlined"
-                            error={emailError}
-                            helperText={emailErrorMessage}
-                            color={passwordError ? 'error' : 'primary'}
-                        />
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel htmlFor="password">Password</FormLabel>
-                        <TextField
-                            required
-                            fullWidth
-                            name="password"
-                            placeholder="••••••"
-                            type="password"
-                            id="password"
-                            autoComplete="new-password"
-                            variant="outlined"
-                            error={passwordError}
-                            helperText={passwordErrorMessage}
-                            color={passwordError ? 'error' : 'primary'}
-                        />
-                    </FormControl>
+                <CardStyled variant="outlined">
+                    <Typography
+                        component="h1"
+                        variant="h4"
+                        sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
+                    >
+                        Sign up
+                    </Typography>
+                    <Box
+                        component="form"
+                        onSubmit={handleSubmit}
+                        sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+                    >
+                        <FormControl>
+                            <FormLabel htmlFor="full_name">Full name</FormLabel>
+                            <TextField
+                                autoComplete="name"
+                                name="full_name"
+                                required
+                                fullWidth
+                                id="full_name"
+                                placeholder="Jon Snow"
+                                error={nameError}
+                                helperText={nameErrorMessage}
+                                color={nameError ? 'error' : 'primary'}
+                            />
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel htmlFor="username">User name</FormLabel>
+                            <TextField
+                                autoComplete="username"
+                                name="username"
+                                required
+                                fullWidth
+                                id="username"
+                                placeholder="JonSnow"
+                                error={nameError}
+                                helperText={nameErrorMessage}
+                                color={nameError ? 'error' : 'primary'}
+                            />
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel htmlFor="email">Email</FormLabel>
+                            <TextField
+                                required
+                                fullWidth
+                                id="email"
+                                placeholder="your@email.com"
+                                name="email"
+                                autoComplete="email"
+                                variant="outlined"
+                                error={emailError}
+                                helperText={emailErrorMessage}
+                                color={passwordError ? 'error' : 'primary'}
+                            />
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel htmlFor="password">Password</FormLabel>
+                            <TextField
+                                required
+                                fullWidth
+                                name="password"
+                                placeholder="••••••"
+                                type="password"
+                                id="password"
+                                autoComplete="new-password"
+                                variant="outlined"
+                                error={passwordError}
+                                helperText={passwordErrorMessage}
+                                color={passwordError ? 'error' : 'primary'}
+                            />
+                        </FormControl>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                onClick={validateInputs}
+                                disabled={loading}
+                            >
+                                Sign up
+                            </Button>
+                            <Typography sx={{ textAlign: 'center' }}>
+                                Already have an account?{' '}
+                                <span>
+                                    <Link
+                                        component={LinkRouter}
+                                        to="/sign-in"
+                                        variant="body2"
+                                        sx={{ alignSelf: 'center' }}
+                                    >
+                                        Sign in
+                                    </Link>
+                                </span>
+                            </Typography>
+                    </Box>
+                    <Divider>
+                        <Typography sx={{ color: 'text.secondary' }}>or</Typography>
+                    </Divider>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                         <Button
-                            type="submit"
                             fullWidth
-                            variant="contained"
-                            onClick={validateInputs}
-                            disabled={loading}
+                            variant="outlined"
+                            onClick={() => alert('Sign up with Google')}
+                            startIcon={<GoogleIcon />}
                         >
-                            Sign up
+                            Sign up with Google
                         </Button>
-                        <Typography sx={{ textAlign: 'center' }}>
-                            Already have an account?{' '}
-                            <span>
-                                <Link
-                                    component={LinkRouter}
-                                    to="/sign-in"
-                                    variant="body2"
-                                    sx={{ alignSelf: 'center' }}
-                                >
-                                    Sign in
-                                </Link>
-                            </span>
-                        </Typography>
-                </Box>
-                <Divider>
-                    <Typography sx={{ color: 'text.secondary' }}>or</Typography>
-                </Divider>
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                    <Button
-                        fullWidth
-                        variant="outlined"
-                        onClick={() => alert('Sign up with Google')}
-                        startIcon={<GoogleIcon />}
-                    >
-                        Sign up with Google
-                    </Button>
-                    <Button
-                        fullWidth
-                        variant="outlined"
-                        onClick={() => alert('Sign up with Facebook')}
-                        startIcon={<FacebookIcon />}
-                    >
-                        Sign up with Facebook
-                    </Button>
-                </Box>
-                </Card>
+                        <Button
+                            fullWidth
+                            variant="outlined"
+                            onClick={() => alert('Sign up with Facebook')}
+                            startIcon={<FacebookIcon />}
+                        >
+                            Sign up with Facebook
+                        </Button>
+                    </Box>
+                </CardStyled>
             </SignUpContainer>
         </GeneralTemplate>
     );
