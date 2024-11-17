@@ -21,11 +21,13 @@ export const getPublications = async () => {
 
 
 export const registerUser = async (user: UserRegister) => {
-
+    console.log("registerUser", user);
+    
     const config = {
         method: 'post',
-        url: 'http://127.0.0.1:8000/api/v1/users/register',
+        url: 'http://127.0.0.1:8000/api/v1/users',
         headers: {
+            'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         data: user
@@ -70,17 +72,17 @@ export const updateUser = async (user: User, token: string) => {
 
 
 export const getToken = async (user: UserToken) => {
-    const data = new FormData();
-    data.append('username', user.username);
-    data.append('password', user.password);
+
+    user.device_name = 'web';
 
     const config = {
         method: 'post',
-        url: 'http://127.0.0.1:8000/api/v1/token',
+        url: 'http://127.0.0.1:8000/api/token',
         headers: {
             'Accept': 'application/json',
+            'Content-Type': 'application/json',
         },
-        data: data
+        data: user
     };
 
     try {

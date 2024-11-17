@@ -44,7 +44,7 @@ export const SignUp = () => {
     }, []);
 
     React.useEffect(() => {
-        if (user.email && user.username && user.name) {
+        if (user.email && user.name) {
             navigate('/');
         }
     }, [user]);
@@ -53,8 +53,7 @@ export const SignUp = () => {
     const validateInputs = () => {
         const email = document.getElementById('email') as HTMLInputElement;
         const password = document.getElementById('password') as HTMLInputElement;
-        const full_name = document.getElementById('full_name') as HTMLInputElement;
-        const username = document.getElementById('username') as HTMLInputElement;
+        const name = document.getElementById('name') as HTMLInputElement;
 
         let isValid = true;
 
@@ -76,7 +75,7 @@ export const SignUp = () => {
             setPasswordErrorMessage('');
         }
 
-        if (!full_name.value || full_name.value.length < 1) {
+        if (!name.value || name.value.length < 1) {
             setNameError(true);
             setNameErrorMessage('Name is required.');
             isValid = false;
@@ -85,14 +84,6 @@ export const SignUp = () => {
             setNameErrorMessage('');
         }
 
-        if (!username.value || username.value.length < 1) {
-            setNameError(true);
-            setNameErrorMessage('Name is required.');
-            isValid = false;
-        } else {
-            setNameError(false);
-            setNameErrorMessage('');
-        }
 
         return isValid;
     };
@@ -105,21 +96,19 @@ export const SignUp = () => {
 
         const data = new FormData(event.currentTarget);
         console.log({
-            full_name: data.get('full_name'),
-            username: data.get('username'),
+            name: data.get('name'),
             email: data.get('email'),
             password: data.get('password'),
         });
 
         const userData = {
-            name: data.get('full_name') as string,
-            username: data.get('username') as string,
+            name: data.get('name') as string,
             email: data.get('email') as string,
             password: data.get('password') as string,
         }
 
         dispatch(register(userData, navigate));
-        setLoading(true);
+        // setLoading(true);
     };
 
     return (
@@ -139,27 +128,13 @@ export const SignUp = () => {
                         sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
                     >
                         <FormControl>
-                            <FormLabel htmlFor="full_name">Full name</FormLabel>
+                            <FormLabel htmlFor="name">User name</FormLabel>
                             <TextField
                                 autoComplete="name"
-                                name="full_name"
+                                name="name"
                                 required
                                 fullWidth
-                                id="full_name"
-                                placeholder="Jon Snow"
-                                error={nameError}
-                                helperText={nameErrorMessage}
-                                color={nameError ? 'error' : 'primary'}
-                            />
-                        </FormControl>
-                        <FormControl>
-                            <FormLabel htmlFor="username">User name</FormLabel>
-                            <TextField
-                                autoComplete="username"
-                                name="username"
-                                required
-                                fullWidth
-                                id="username"
+                                id="name"
                                 placeholder="JonSnow"
                                 error={nameError}
                                 helperText={nameErrorMessage}

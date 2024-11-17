@@ -97,12 +97,12 @@ export const SignIn = () => {
 
         const data = new FormData(event.currentTarget);
         console.log({
-            username: data.get('username'),
+            name: data.get('name'),
             password: data.get('password'),
         });
 
         const userData = {
-            username: data.get('username') as string,
+            name: data.get('name') as string,
             password: data.get('password') as string,
         }
 
@@ -121,7 +121,7 @@ export const SignIn = () => {
     React.useEffect(() => {
         console.log('SignUp user changed', user);
         
-        if (user.email && user.username && user.name) {
+        if (user.email && user.name) {
             navigate('/');
         }
     }, [user]);

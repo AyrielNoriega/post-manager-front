@@ -2,7 +2,6 @@
 export interface User {
     id?: string | '';
     name: string;
-    username: string;
     email: string;
 }
 
@@ -21,6 +20,7 @@ export interface Publication {
 }
 
 export interface UserToken {
-    username: string;
+    name: string;
     password: string;
+    device_name?: string;
 }

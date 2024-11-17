@@ -22,11 +22,13 @@ export const register = (user: UserRegister, navigate: (path: string) => void) =
 
 
     return async (dispatch: Dispatch) => {
-
+        console.log('antes de registro', user);
         const res = await registerUser(user);
+        console.log('despues de registro', res);
+
         // dispatch(setUser(res));
         if (res.status != 201) {
-            console.log('No se registro el user registrado', res.data);
+            console.log('No se registro el user', res.data);
         }
 
         //Obtener token
@@ -40,14 +42,12 @@ export const register = (user: UserRegister, navigate: (path: string) => void) =
             const user_jwt: User = {
                 id: user.id,
                 name: user.name,
-                username: user.username,
                 email: user.email,
             }
 
             const dataUser: User = {
                 id: user_jwt.id,
                 name: user_jwt.name,
-                username: user_jwt.username,
                 email: user_jwt.email,
             }
             // Establecer usuario
@@ -107,14 +107,12 @@ export const authenticateUser = (user: UserToken, navigate: (path: string) => vo
                     const user_jwt: User = {
                         id: register.data.id,
                         name: register.data.name,
-                        username: register.data.username,
                         email: register.data.email,
                     }
 
                     const dataUser: User = {
                         id: user_jwt.id,
                         name: user_jwt.name,
-                        username: user_jwt.username,
                         email: user_jwt.email,
                     }
                     // Establecer usuario
@@ -174,7 +172,6 @@ const getTokenLocalStorage = () => {
 export const setUserInLocalStorage = (user: User) => {
     localStorage.setItem('id', user.id as string);
     localStorage.setItem('name', user.name);
-    localStorage.setItem('username', user.username);
     localStorage.setItem('email', user.email);
 };
 
@@ -188,7 +185,7 @@ export const fetchUserFromLocalStorage = () => {
         const username = localStorage.getItem('username') as string;
         const email = localStorage.getItem('email') as string;
 
-        const user: User = { name, username, email, id };
+        const user: User = { name, email, id };
         if (name && username && email) {
             dispatch(setUser(user));
         }
