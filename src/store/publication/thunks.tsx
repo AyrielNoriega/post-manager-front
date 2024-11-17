@@ -40,7 +40,7 @@ export const register = (user: UserRegister, navigate: (path: string) => void) =
             }
             // Establecer usuario
             dispatch(setUser(dataUser));
-            setTokenLocalStorage(register.data.data.token);
+            setTokenLocalStorage(register.data.token);
             setUserInLocalStorage(dataUser);
 
             navigate('/');
@@ -59,16 +59,15 @@ export const register = (user: UserRegister, navigate: (path: string) => void) =
 // Actaulizar usuario
 export const update = (user: User) => {
 
-    const token = getTokenOrRedirect()
+    const token = getTokenLocalStorage();
     const id = localStorage.getItem('id') as string;
-    console.log(id);
     user.id = id;
 
     return async (dispatch: Dispatch) => {
-
         const res = await updateUser(user, token);
 
         console.log(res);
+        return
         // Establecer usuario
         dispatch(setUser(user));
         setUserInLocalStorage(user);
@@ -94,9 +93,10 @@ export const authenticateUser = (user: UserToken, navigate: (path: string) => vo
                         email: register.data.data.attributes.email,
                     }
 
+
                     // Establecer usuario
                     dispatch(setUser(dataUser));
-                    setTokenLocalStorage(register.data.data.token);
+                    setTokenLocalStorage(register.data.token);
                     setUserInLocalStorage(dataUser);
 
                     navigate('/');
@@ -111,25 +111,12 @@ export const authenticateUser = (user: UserToken, navigate: (path: string) => vo
 };
 
 
-// Función para verificar si el token ha expirado
-const isTokenExpired = (token: string) => {
-    try {
-        // const { exp } = jwtDecode<{ exp: number }>(token);
-        // if (Date.now() >= exp * 1000) {
-        //     return true;
-        // }
-        return false;
-    } catch (error) {
-        console.error('Error al decodificar el token:', error);
-        return true;
-    }
-};
 
 
 // Función para obtener el token o redirigir al inicio de sesión
 export const getTokenOrRedirect = () => {
     const token = getTokenLocalStorage();
-    if (!token || isTokenExpired(token)) {
+    if (!token) {
         window.location.href = '/login'; // Redirigir al usuario a la página de inicio de sesión
         throw new Error('Token expirado o no disponible');
     }
@@ -138,12 +125,14 @@ export const getTokenOrRedirect = () => {
 
 
 const setTokenLocalStorage = (token: string) => {
+    console.log('Guardando token en Local Storage:', token);
+    
     localStorage.setItem('token', token);
 }
 
 
 const getTokenLocalStorage = () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token') as string;
     console.log('Token obtenido de Local Storage:', token);
     return token;
 }

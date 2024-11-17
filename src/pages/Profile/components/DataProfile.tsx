@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { update } from "../../../store/publication/thunks";
 import { AppDispatch, RootState } from "../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,15 +10,20 @@ export const DataProfile = () => {
     const dispatch: AppDispatch = useDispatch();
     const { user } = useSelector((state: RootState ) => state.publication);
 
-    const [name, setName] = useState(user.name);
-    const [email, setEmail] = useState(user.email);
-
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
 
     const [emailError, setEmailError] = useState(false);
     const [emailErrorMessage, setEmailErrorMessage] = useState('');
     const [nameError, setNameError] = useState(false);
     const [nameErrorMessage, setNameErrorMessage] = useState('');
 
+    useEffect(() => {
+        if (user) {
+            setName(user.name);
+            setEmail(user.email);
+        }
+    }, [user]);
 
     const validateInputs = () => {
 
@@ -54,18 +59,11 @@ export const DataProfile = () => {
         }
 
         const data = new FormData(event.currentTarget);
-        console.log({
-            full_name: data.get('full_name'),
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-
+        
         const userData = {
-            name: data.get('full_name') as string,
+            name: data.get('name') as string,
             email: data.get('email') as string,
-            password: data.get('password') as string,
         }
-        console.log(userData);
         dispatch(update(userData));
     };
     return (
@@ -86,7 +84,7 @@ export const DataProfile = () => {
                     error={nameError}
                     helperText={nameErrorMessage}
                     color={nameError ? 'error' : 'primary'}
-                    value={user.name}
+                    value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
             </FormControl>
@@ -103,7 +101,7 @@ export const DataProfile = () => {
                     error={emailError}
                     helperText={emailErrorMessage}
                     color={emailError ? 'error' : 'primary'}
-                    value={user.email}
+                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
             </FormControl>
