@@ -23,8 +23,8 @@ import { SignInContainer } from './components/SignInContainer';
 
 
 export const SignIn = () => {
-    const [usernameError, setEmailError] = React.useState(false);
-    const [usernameErrorMessage, setEmailErrorMessage] = React.useState('');
+    const [emailError, setEmailError] = React.useState(false);
+    const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
     const [passwordError, setPasswordError] = React.useState(false);
     const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
     const [open, setOpen] = React.useState(false);
@@ -46,18 +46,14 @@ export const SignIn = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setLoading(true);
-        if (usernameError || passwordError) {
+        if (emailError || passwordError) {
             return;
         }
 
         const data = new FormData(event.currentTarget);
-        console.log({
-            name: data.get('name'),
-            password: data.get('password'),
-        });
 
         const userData = {
-            name: data.get('name') as string,
+            email: data.get('email') as string,
             password: data.get('password') as string,
         }
 
@@ -82,14 +78,14 @@ export const SignIn = () => {
     }, [user]);
 
     const validateInputs = () => {
-        const username = document.getElementById('username') as HTMLInputElement;
+        const email = document.getElementById('email') as HTMLInputElement;
         const password = document.getElementById('password') as HTMLInputElement;
 
         let isValid = true;
 
-        if (!username.value || password.value.length < 3) {
+        if (!email.value || password.value.length < 3) {
             setEmailError(true);
-            setEmailErrorMessage('Please enter a valid username.');
+            setEmailErrorMessage('Please enter a valid email.');
             isValid = false;
         } else {
             setEmailError(false);
@@ -124,39 +120,39 @@ export const SignIn = () => {
                         onSubmit={handleSubmit}
                         noValidate
                         sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        width: '100%',
-                        gap: 2,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            width: '100%',
+                            gap: 2,
                         }}
                     >
                         <FormControl>
-                        <FormLabel htmlFor="username">User name</FormLabel>
+                        <FormLabel htmlFor="email">Email</FormLabel>
                         <TextField
-                            error={usernameError}
-                            helperText={usernameErrorMessage}
-                            id="username"
-                            type="username"
-                            name="username"
-                            placeholder="username"
-                            autoComplete="username"
+                            error={emailError}
+                            helperText={emailErrorMessage}
+                            id="email"
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            autoComplete="email"
                             autoFocus
                             required
                             fullWidth
                             variant="outlined"
-                            color={usernameError ? 'error' : 'primary'}
-                            sx={{ ariaLabel: 'username' }}
+                            color={emailError ? 'error' : 'primary'}
+                            sx={{ ariaLabel: 'email' }}
                         />
                         </FormControl>
                         <FormControl>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                             <FormLabel htmlFor="password">Password</FormLabel>
                             <Link
-                            component="button"
-                            type="button"
-                            onClick={handleClickOpen}
-                            variant="body2"
-                            sx={{ alignSelf: 'baseline' }}
+                                component="button"
+                                type="button"
+                                onClick={handleClickOpen}
+                                variant="body2"
+                                sx={{ alignSelf: 'baseline' }}
                             >
                                 Forgot your password?
                             </Link>

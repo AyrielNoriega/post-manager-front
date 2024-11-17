@@ -20,7 +20,7 @@ export interface Publication {
 }
 
 export interface UserToken {
-    name: string;
+    email: string;
     password: string;
     device_name?: string;
 }

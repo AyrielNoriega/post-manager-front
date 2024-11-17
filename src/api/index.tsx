@@ -74,7 +74,7 @@ export const updateUser = async (user: User, token: string) => {
 export const getToken = async (user: UserToken) => {
 
     user.device_name = 'web';
-
+    console.log(user);
     const config = {
         method: 'post',
         url: 'http://127.0.0.1:8000/api/token',

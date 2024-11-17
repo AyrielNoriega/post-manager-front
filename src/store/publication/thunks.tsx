@@ -97,30 +97,24 @@ export const authenticateUser = (user: UserToken, navigate: (path: string) => vo
         try {
                 //Obtener token
                 const register = await getToken(user);
+
                 if (register.status == 200) {
 
-                    const dataToken = {
-                        access_token: register.data.access_token,
-                        token_type: register.data.token_type,
-                    }
-
-                    const user_jwt: User = {
-                        id: register.data.id,
-                        name: register.data.name,
-                        email: register.data.email,
-                    }
-
                     const dataUser: User = {
-                        id: user_jwt.id,
-                        name: user_jwt.name,
-                        email: user_jwt.email,
+                        id: register.data.data.attributes.id,
+                        name: register.data.data.attributes.name,
+                        email: register.data.data.attributes.email,
                     }
+
                     // Establecer usuario
                     dispatch(setUser(dataUser));
-                    setTokenLocalStorage(dataToken.access_token);
+                    setTokenLocalStorage(register.data.data.token);
                     setUserInLocalStorage(dataUser);
 
                     navigate('/');
+                } else {
+
+                    console.log("No se pudo obtener el token", register.data);
                 }
         } catch (error) {
             console.log('No se pudo autenticar al usuario', error);
@@ -157,7 +151,6 @@ export const getTokenOrRedirect = () => {
 
 const setTokenLocalStorage = (token: string) => {
     localStorage.setItem('token', token);
-    console.log('Token guardado en Local Storage:', token);
 }
 
 
