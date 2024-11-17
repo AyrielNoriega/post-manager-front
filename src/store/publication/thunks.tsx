@@ -1,8 +1,8 @@
 import { Dispatch } from "redux";
 
-import { getPublications, getToken, registerUser, updateUser } from "../../api";
+import { getPublications, getToken, registerUser, storePost, updateUser } from "../../api";
 import { setPublications, setUser } from "./publicationSlice";
-import { User, UserRegister, UserToken } from "../../interfaces";
+import { Post, User, UserRegister, UserToken } from "../../interfaces";
 
 // Obtener todas las publicaciones
 export const getAllPublications = () => {
@@ -113,6 +113,28 @@ export const authenticateUser = (user: UserToken, navigate: (path: string) => vo
     };
 };
 
+
+
+
+
+export const createPost = (post: Post, navigate: (path: string) => void) => {
+
+    return async (dispatch: Dispatch) => {
+        console.log('antes de registro', post);
+        const res = await storePost(
+            post,
+            getTokenLocalStorage(),
+            parseInt(localStorage.getItem('id') as string)
+        );
+        console.log('despues de registro', res);
+
+        // dispatch(setUser(res));
+        if (res.status != 201) {
+            console.log('No se registro el user', res.data);
+        }
+        navigate('/');
+    };
+};
 
 
 

@@ -11,10 +11,14 @@ export interface UserRegister extends User {
 }
 
 
-export interface Publication {
-    id : number;
+export interface Post {
     title: string;
     content: string;
+}
+
+
+export interface Publication extends Post {
+    id : number;
     author: string;
     date: string;
 }

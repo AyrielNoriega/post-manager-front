@@ -88,6 +88,7 @@ export default function AppAppBar() {
                 </Button>
                 {
                     user.name && (
+                        <>
                         <Button
                             variant="text"
                             color="info"
@@ -97,6 +98,16 @@ export default function AppAppBar() {
                         >
                             Perfil - {user.name}
                         </Button>
+                        <Button
+                            variant="text"
+                            color="info"
+                            size="small"
+                            component={Link}
+                            to={'/post/crear'}
+                        >
+                            Crear Post
+                        </Button>
+                        </>
                     )
                 }
 
