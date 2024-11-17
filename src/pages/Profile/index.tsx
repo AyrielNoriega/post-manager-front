@@ -22,6 +22,14 @@ export const Profile = () => {
         }
     }, [dispatch]);
 
+    useEffect(() => {
+        dispatch(fetchUserFromLocalStorage());
+
+        return () => {
+            console.log('SignUp unmounted');
+        }
+    }, [dispatch]);
+
 
     return (
         <GeneralTemplate>
@@ -33,20 +41,6 @@ export const Profile = () => {
                     >
                         <DataProfile />
                     </Grid>
-                </Grid>
-                <Grid container spacing={2} columns={8}>
-                    {
-                        publications.map((data) => (
-                            <PublicationCard
-                                key={data.id}
-                                id={data.id}
-                                title={data.title}
-                                content={data.content}
-                                author={data.author}
-                                created_at={data.date}
-                            />
-                        ))
-                    }
                 </Grid>
             </Box>
         </GeneralTemplate>
