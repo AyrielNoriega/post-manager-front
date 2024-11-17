@@ -112,15 +112,6 @@ export default function Footer() {
                 <Link color="text.secondary" variant="body2" href="#">
                 Testimonials
                 </Link>
-                <Link color="text.secondary" variant="body2" href="#">
-                Highlights
-                </Link>
-                <Link color="text.secondary" variant="body2" href="#">
-                Pricing
-                </Link>
-                <Link color="text.secondary" variant="body2" href="#">
-                FAQs
-                </Link>
             </Box>
             <Box
                 sx={{
@@ -138,9 +129,7 @@ export default function Footer() {
                 <Link color="text.secondary" variant="body2" href="#">
                 Careers
                 </Link>
-                <Link color="text.secondary" variant="body2" href="#">
-                Press
-                </Link>
+
             </Box>
             <Box
                 sx={{
@@ -158,68 +147,10 @@ export default function Footer() {
                 <Link color="text.secondary" variant="body2" href="#">
                 Privacy
                 </Link>
-                <Link color="text.secondary" variant="body2" href="#">
-                Contact
-                </Link>
+
             </Box>
             </Box>
-            <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    pt: { xs: 4, sm: 8 },
-                    width: '100%',
-                    borderTop: '1px solid',
-                    borderColor: 'divider',
-                }}
-            >
-                <div>
-                    <Link color="text.secondary" variant="body2" href="#">
-                        Privacy Policy
-                    </Link>
-                    <Typography sx={{ display: 'inline', mx: 0.5, opacity: 0.5 }}>
-                        &nbsp;•&nbsp;
-                    </Typography>
-                    <Link color="text.secondary" variant="body2" href="#">
-                        Terms of Service
-                    </Link>
-                    <Copyright />
-                </div>
-                <Stack
-                    direction="row"
-                    spacing={1}
-                    useFlexGap
-                    sx={{ justifyContent: 'left', color: 'text.secondary' }}
-                >
-                    <IconButton
-                    color="inherit"
-                    size="small"
-                    href="https://github.com/mui"
-                    aria-label="GitHub"
-                    sx={{ alignSelf: 'center' }}
-                    >
-                    <FacebookIcon />
-                    </IconButton>
-                    <IconButton
-                    color="inherit"
-                    size="small"
-                    href="https://x.com/MaterialUI"
-                    aria-label="X"
-                    sx={{ alignSelf: 'center' }}
-                    >
-                    <TwitterIcon />
-                    </IconButton>
-                    <IconButton
-                    color="inherit"
-                    size="small"
-                    href="https://www.linkedin.com/company/mui/"
-                    aria-label="LinkedIn"
-                    sx={{ alignSelf: 'center' }}
-                    >
-                    <LinkedInIcon />
-                    </IconButton>
-                </Stack>
-            </Box>
+
         </Container>
         </React.Fragment>
     );

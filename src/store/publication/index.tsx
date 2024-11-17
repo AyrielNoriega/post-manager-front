@@ -1,0 +1,1 @@
+export { publicationSlice } from './publicationSlice';

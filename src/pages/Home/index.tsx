@@ -1,7 +1,5 @@
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid2';
-import IconButton from '@mui/material/IconButton';
-import RssFeedRoundedIcon from '@mui/icons-material/RssFeedRounded';
 import { GeneralTemplate } from '../../components/template/general.template';
 import { Search } from './components/Search';
 import { useEffect } from 'react';
@@ -44,9 +42,6 @@ export const MainContent = () => {
                     }}
                 >
                     <Search />
-                    <IconButton size="small" aria-label="RSS feed">
-                        <RssFeedRoundedIcon />
-                    </IconButton>
                 </Box>
                 <Box
                     sx={{
@@ -69,9 +64,6 @@ export const MainContent = () => {
                         }}
                         >
                         <Search />
-                        <IconButton size="small" aria-label="RSS feed">
-                            <RssFeedRoundedIcon />
-                        </IconButton>
                     </Box>
                 </Box>
                 <Grid container spacing={2} columns={8}>
